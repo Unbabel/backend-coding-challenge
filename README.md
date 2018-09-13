@@ -17,7 +17,7 @@
 * Page load time shouldnt exceed 1 second
 
 #### TODO's
-1. Set up infrastructure **[OK]**
+1. Set up infrastructure **[OK]**````
 
 #### Resources
 * Unbabel's API: http://developers.unbabel.com/
