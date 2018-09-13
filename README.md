@@ -17,7 +17,8 @@
 * Page load time shouldnt exceed 1 second
 
 #### TODO's
-1. Set up infrastructure **[OK]**````
+1. Set up infrastructure **[OK]**
+2. Development of forms.py 
 
 #### Resources
 * Unbabel's API: http://developers.unbabel.com/

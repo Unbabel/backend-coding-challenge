@@ -3,4 +3,3 @@ __pycache__/
 app/__pycache__/
 migrations/
 venv/
-docs/
