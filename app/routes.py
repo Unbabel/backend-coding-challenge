@@ -1,14 +1,22 @@
 from app import app
 from flask import render_template
 from app.forms import UnbabelForm
-from unbabel.api import UnbabelApi
+import requests
 
 
-uapi = UnbabelApi(username='fullstack-challenge', api_key='9db71b322d43a6ac0f681784ebdcc6409bb83359', sandbox=True,)
-
-to_translate = 'Hello world!'
-target_language = 'pt'
-uapi.post_translations(text=to_translate, target_language=target_language,)
+url = 'https://sandbox.unbabel.com/tapi/v2/translation/'
+headers = {
+    'Authorization': 'ApiKey fullstack-challenge:9db71b322d43a6ac0f681784ebdcc6409bb83359',
+    'Content-Type': 'application/json',
+}
+payload = {
+    'text': 'Hello world',
+    'source_language': 'en',
+    'target_language': 'pt',
+    'text_format': 'text',
+}
+r = requests.post(url, json=payload, headers=headers)
+print(r)
 
 
 @app.route('/')
