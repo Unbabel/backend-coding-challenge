@@ -1,5 +1,5 @@
 import app
-from app import db
+from database import db
 from app.models import Translation
 
 app = app.create_app()
