@@ -1,12 +1,12 @@
 from flask import Flask
 from config import Config
-from database import database
+from database import database_init
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    database(app)
+    database_init(app)
 
     from app.views import bp as index_bp
     app.register_blueprint(index_bp)

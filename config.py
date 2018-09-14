@@ -1,8 +1,8 @@
 
 
 class Config(object):
-    DEBUG = False
-    TESTING = False
+    DEBUG = True
+    TESTING = True
     SECRET_KEY = '86xd8Zx94xd7x12o}x18f28f517xbf14c9ba1bx81b888ui1ortbb4'
 
     POSTGRES = {
@@ -12,9 +12,13 @@ class Config(object):
         'host': 'localhost',
         'port': '5432',
     }
-
+    # SQLAlchemy
     SQLALCHEMY_DATABASE_URI = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Redis
+    LISTEN = ['default']
+    REDISTOGO_URL = 'redis://localhost:6379'
 
     # Unbabel API
     URL = 'https://sandbox.unbabel.com/tapi/v2/translation/'

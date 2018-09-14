@@ -5,6 +5,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-def database(app):
+def database_init(app):
     db.init_app(app)
     migrate.init_app(app, db)
