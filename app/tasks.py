@@ -1,8 +1,8 @@
 import requests
-from celery import Celery
+from app import make_celery
 from config import Config
 
-app = Celery('tasks', broker=Config.REDISTOGO_URL)
+celery = make_celery()
 
 payload = {
     'text': 'Hello world',
@@ -15,6 +15,6 @@ payload = {
 # print(r)
 
 
-@app.task
+@celery.task
 def add(x, y):
     return x + y
