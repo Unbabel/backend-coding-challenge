@@ -10,7 +10,7 @@ def send_text(source_text):
     payload = {
         'text': source_text,
         'source_language': 'en',
-        'target_language': 'pt',
+        'target_language': 'es',
         'text_format': 'text',
     }
     response = requests.post(Config.URL, json=payload, headers=Config.HEADERS)
