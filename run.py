@@ -1,5 +1,8 @@
-from app import app, db
+import app
+from database import db
 from app.models import Translation
+
+app = app.create_app()
 
 
 @app.shell_context_processor
