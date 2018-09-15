@@ -13,9 +13,4 @@ class Index(Resource):
         input_text = request.form.get('input_field')
 
         from app.tasks import send_text
-        response = send_text.delay(input_text)
-
-        from app.tasks import save_translation
-        save_translation.delay(response)
-
-
+        send_text.delay(input_text)
