@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired
 
 
 class UnbabelForm(FlaskForm):
-    input = StringField('Text to Translate', validators=[DataRequired()])
+    input_field = StringField('Text to Translate', validators=[DataRequired()])
     submit = SubmitField('Translate to Spanish(ES)')

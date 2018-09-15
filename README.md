@@ -18,7 +18,10 @@
 
 #### TODO's
 1. Set up infrastructure **[OK]**
-2. Development of forms.py 
+2. Development of forms.py **[OK]**
+3. Development of models.py **[OK]**
+4. Implementing of database migrations **[OK]**
+5. Development of views.py
 
 #### Resources
 * Unbabel's API: http://developers.unbabel.com/
