@@ -35,4 +35,4 @@ def save_request(data):
 
 @celery.task
 def get_periodic_request():
-    pass
+    print('test')
