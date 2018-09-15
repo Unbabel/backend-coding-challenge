@@ -1,23 +1,14 @@
-from flask import Blueprint, render_template
-from flask.views import MethodView
+from flask import render_template, make_response
+from flask_restful import Resource
 from app.forms import UnbabelForm
 
 
-bp = Blueprint('app', __name__)
-
-
-@bp.route('/')
-@bp.route('/index')
-def index():
-    form = UnbabelForm()
-    return render_template('index.html', title='Unbabel Coding Challenge', form=form)
-
-
-class Index(MethodView):
-    def post(self):
+class Index(Resource):
+    def get(self):
+        headers = {'Content-Type': 'text/html'}
         form = UnbabelForm()
-        if form.validate_on_submit():
-            add.delay(4, 15)
+        return make_response(render_template('index.html', title='Unbabel Coding Challenge', form=form), 200, headers)
 
-
-from app.tasks import add
+    def post(self):
+        from app.tasks import add
+        add.delay(4, 15)

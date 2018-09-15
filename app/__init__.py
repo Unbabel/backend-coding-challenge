@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_restful import Api
 from celery import Celery
 from config import Config
 from database import database_init
@@ -30,11 +31,12 @@ def make_celery(app=None):
 
 def create_app(config_class=Config):
     app = Flask(__name__)
+    api = Api(app)
     app.config.from_object(config_class)
     database_init(app)
 
-    from app.views import bp as index_bp
-    app.register_blueprint(index_bp)
+    from app.views import Index
+    api.add_resource(Index, '/')
 
     return app
 

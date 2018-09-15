@@ -20,6 +20,9 @@ class Config(object):
     LISTEN = ['default']
     REDISTOGO_URL = 'redis://localhost:6379'
 
+    # To start celery worker
+    # celery worker -A app.tasks --loglevel=info
+
     # Unbabel API
     URL = 'https://sandbox.unbabel.com/tapi/v2/translation/'
     HEADERS = {
