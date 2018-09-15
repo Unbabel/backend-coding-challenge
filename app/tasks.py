@@ -8,7 +8,7 @@ celery = make_celery()
 
 
 @celery.task
-def send_text(source_text):
+def send_request(source_text):
     payload = {
         'text': source_text,
         'source_language': 'en',
@@ -18,16 +18,21 @@ def send_text(source_text):
     response = requests.post(Config.URL, json=payload, headers=Config.HEADERS)
     if response.status_code == 201:
         data = response.json()
-        save_data.delay(data)
-
+        save_request.delay(data)
+        
 
 @celery.task
-def save_data(data):
+def save_request(data):
     translation = Translation(
         source_text=data['text'],
-        translated_text='Pending',
+        translated_text='requested',
         uid=data['uid'],
         status=data['status'],
     )
     db.session.add(translation)
     db.session.commit()
+
+
+@celery.task
+def get_periodic_request():
+    pass
