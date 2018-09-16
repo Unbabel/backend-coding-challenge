@@ -1,0 +1,9 @@
+# Folders
+.idea/
+__pycache__/
+app/__pycache__/
+migrations/
+venv/
+
+# Logs
+celerybeat-schedule
