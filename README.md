@@ -37,25 +37,43 @@ Please fork this repo before you start working on the challenge. We will evaluat
  
     sudo docker-compose -f docker-compose-dev.yml up -d
     
-2 - Upgrade the database - from the project path:
+2 - Create virtual environment and install requirements
+
+3 - Upgrade the database - from the project path:
  
     flask db upgrade
  
-3 - Setup the callback URL, there are two ways. Using CALLBACK_IP_ADDRESS using an address reachable by Unbabel Sandbox:
+4 - Setup the callback URL:
+
+There are several ways to setup the variable. 
+Using CALLBACK_IP_ADDRESS that will map inside the callback link (http://CALLBACK_IP_ADDRESS/api/translation), this address must be reachable by Unbabel Sandbox:
  
     export CALLBACK_IP_ADDRESS=somehost.com
     
-Or using a testing proxy from a webhook testing service (e.g. webhook.site) in:
+    or
+    
+    export CALLBACK_IP_ADDRESS=10.21.10.10:5000
+    
+Define your own CALLBACK_URL, for example using a testing proxy with webhook testing service (e.g. webhook.site) in:
  
     export CALLBACK_URL=https://webhook.site/00b3fd24-3a7d-42af-9d31-771e7293ddf4
+    
+Note: using the second method the testing proxy must know where to redirect the response.
+
+Change the application.ini with the desired variable.
+
  
-4 - Open one terminal with the application:
+5 - Open one terminal with the application:
  
     uwsgi --ini config/application.ini
     
-5 - Open another terminal with Celery:
+6 - Open another terminal with Celery (also need to define step 3):
  
     celery worker --app=app -l info
+    
+7 - To run the tests
+
+    python -m unittest
     
 ### Extra
 You can also build the image 
@@ -63,6 +81,8 @@ You can also build the image
     sudo docker build . -t unbabel-app
     
 Run everything together 
+
+    Change the disered variables in the file and run:
  
     sudo docker-compose -f docker-compose.yml up -d
     

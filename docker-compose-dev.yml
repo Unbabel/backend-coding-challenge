@@ -1,0 +1,29 @@
+version: "2"
+
+services:
+
+  redis:
+    image: "redis:3.0-alpine"
+    command: redis-server
+    volumes:
+      - "redis:/data"
+    ports:
+      - "6379:6379"
+  db:
+    container_name: postgres
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_ROOT_USER=postgres
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=test_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  redis:
+  db-data:
