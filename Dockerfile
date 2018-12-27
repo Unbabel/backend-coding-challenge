@@ -13,10 +13,8 @@ RUN apk add --no-cache pcre
 RUN /home/unbabel/app
 
 COPY ./app /home/unbabel/app
-COPY ./run.py /home/unbabel/app/
 COPY ./settings.py /home/unbabel/app/
 COPY ./requirements.txt /home/unbabel/app
-COPY ./requirements-prod.txt /home/unbabel/app
 
 RUN pip install --no-cache-dir -r /home/unbabel/app/requirements.txt
 RUN pip install --no-cache-dir -r /home/unbabel/app/requirements-prod.txt
