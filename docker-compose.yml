@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+
+  redis:
+    image: "redis:3.0-alpine"
+    command: redis-server
+    volumes:
+      - "redis:/data"
+    ports:
+      - "6379:6379"
+  db:
+    container_name: postgres
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+#  app:
+#    container_name: application
+#    restart: always
+#    image: unbabel-app:latest
+#    enviorement:
+#      - FLASK_ENV="production"
+#    command: uwsgi --ini /home/unbabel/config/application.ini
+#    ports:
+#      - "5000:5000"
+#  celery:
+#    build: .
+#    command: celery worker -A snakeeyes.blueprints.contact.tasks
+#    volumes:
+#      - '.:/snakeeyes'
+volumes:
+  redis:
