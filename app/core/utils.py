@@ -1,5 +1,8 @@
 
 import uuid
+
+from sqlalchemy import func, desc
+
 import settings
 
 from app.core.models import Translation, db
@@ -51,5 +54,6 @@ def update_translation(uid, status=None, translated_text=None):
         db.session.flush()
 
 
-def get_translations():
-    return [x.json() for x in db.session.query(Translation).all()]
+def get_translations(descend=False):
+    order_by_query = desc(func.char_length(Translation.translated_text)) if descend else func.char_length(Translation.translated_text)
+    return [x.json() for x in db.session.query(Translation).order_by(order_by_query).all()]

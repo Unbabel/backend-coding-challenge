@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from mock import patch, Mock
+from sqlalchemy import func
 
 from app.core.models import Translation
 from app.core.utils import translation_uuid_exists, generate_uuid, store_translation_in_database, update_translation, \
@@ -88,21 +89,35 @@ class UtilsTest(TestCase):
         mock_db.session.query.return_value.filter.return_value.update.assert_called_with(
             {'translated_text': "SOME TRANSLATION"})
 
+    @patch('app.core.utils.desc')
     @patch('app.core.utils.db')
-    def test_get_translations(self, mock_db):
-        mock_db.session.query.return_value.all.return_value = [
-            Translation(uuid='uuid1', source_text='some text', source_language='en', target_language='es', status=Translation.PENDING),
+    def test_get_translations_with_ascend(self, mock_db, mock_desc):
+        mock_db.session.query.return_value.order_by.return_value.all.return_value = [
             Translation(uuid='uuid3', source_text='some text 3', source_language='en', target_language='es', status=Translation.PENDING),
+            Translation(uuid='uuid1', source_text='some text', source_language='en', target_language='es', status=Translation.PENDING),
         ]
         result = get_translations()
-        self.assertEqual(result[0]['uuid'], 'uuid1')
-        self.assertEqual(result[0]['source_text'], 'some text')
+        self.assertEqual(result[0]['uuid'], 'uuid3')
+        self.assertEqual(result[0]['source_text'], 'some text 3')
         self.assertEqual(result[0]['source_language'], 'en')
         self.assertEqual(result[0]['target_language'], 'es')
         self.assertEqual(result[0]['status'], 'PENDING')
 
-        self.assertEqual(result[1]['uuid'], 'uuid3')
-        self.assertEqual(result[1]['source_text'], 'some text 3')
+        self.assertEqual(result[1]['uuid'], 'uuid1')
+        self.assertEqual(result[1]['source_text'], 'some text')
         self.assertEqual(result[1]['source_language'], 'en')
         self.assertEqual(result[1]['target_language'], 'es')
         self.assertEqual(result[1]['status'], 'PENDING')
+
+        mock_desc.assert_not_called()
+
+    @patch('app.core.utils.desc')
+    @patch('app.core.utils.db')
+    def test_get_translations_with_descend(self, mock_db, mock_desc):
+        mock_db.session.query.return_value.order_by.return_value.all.return_value = [
+            Translation(uuid='uuid1', source_text='some text', source_language='en', target_language='es', status=Translation.PENDING),
+            Translation(uuid='uuid3', source_text='some text 3', source_language='en', target_language='es', status=Translation.PENDING),
+        ]
+        get_translations(descend=True)
+
+        mock_desc.assert_called()
