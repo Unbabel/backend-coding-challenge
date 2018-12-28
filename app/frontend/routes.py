@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, url_for, redirect
 
 from app.core.utils import get_translations, store_translation_in_database
 from app.frontend.forms import SubmitTranslationsForm
@@ -19,5 +19,7 @@ def home_page():
             flash('Translation added with success', category='success')
         except Exception:
             flash('An error happen while adding the translation. Please try again later.', category='danger')
+            
+    descend = True if request.args.get('order') == 'desc' else False
+    return render_template('index.html', form=form, translations=get_translations(descend=descend), descend=descend)
 
-    return render_template('index.html', form=form, translations=get_translations())
