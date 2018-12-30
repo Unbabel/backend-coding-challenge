@@ -34,5 +34,10 @@ def send_request_to_unbabel(uid, source_text):
         "callback_url": get_callback_url(),
         "uid": uid
     }
-    return requests.post(settings.UNBABEL_TRANSLATION_URL, data=json.dumps(data), headers=headers)
+    try:
+        response = requests.post(settings.UNBABEL_TRANSLATION_URL, data=json.dumps(data), headers=headers)
+    except Exception:
+        response = None
+
+    return response
 

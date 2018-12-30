@@ -12,9 +12,9 @@ logger = logging.getLogger(__name__)
 def send_translation_to_unbabel(uid, input_text):
     with create_app().app_context():
         response = send_request_to_unbabel(uid, input_text)
-        if response.status_code == 201:
+        if response is not None and response.status_code == 201:
             update_translation(uid, status=Translation.PENDING)
             logger.info("Message is Pending now - waiting for the translation")
         else:
             update_translation(uid, status=Translation.CANCELLED)
-            logger.info("Message had a problem when sending to Unbabel servers {}".format(response.content))
+            logger.info("Message had a problem when sending to Unbabel servers")

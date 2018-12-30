@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from mock import patch, Mock
-from sqlalchemy import func
 
 from app.core.models import Translation
 from app.core.utils import translation_uuid_exists, generate_uuid, store_translation_in_database, update_translation, \

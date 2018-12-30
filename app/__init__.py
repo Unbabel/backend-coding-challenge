@@ -52,7 +52,7 @@ def create_app():
     from app.backend.routes import mod as backend_mod
     app.register_blueprint(backend_mod, url_prefix='/api')
 
-    if 'db' not in sys.argv and settings.CALLBACK_IP_ADDRESS is None and settings.CALLBACK_URL is None:
+    if 'unittest' not in sys.argv[0] and 'db' not in sys.argv and settings.CALLBACK_IP_ADDRESS is None and settings.CALLBACK_URL is None:
         raise Exception("Please review README and export CALLBACK_IP_ADDRESS or CALLBACK_URL")
 
     return app
