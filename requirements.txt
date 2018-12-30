@@ -7,7 +7,10 @@ Flask-SQLAlchemy==2.3.2
 Flask-Testing==0.7.1
 Flask-WTF==0.14.2
 SQLAlchemy==1.2.15
+SQLAlchemy-Utils==0.33.9
 requests==2.21.0
+psycopg2-binary==2.7.6.1
+redis==3.0.1
 WTForms==2.2.1
 mock==2.0.0
 uwsgi==2.0.17.1
