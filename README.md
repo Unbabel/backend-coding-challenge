@@ -82,9 +82,13 @@ You can also build the image
     
 Run everything together 
 
-    Change the disered variables in the file and run:
+    Change the variables in the docker-compose.yml file and run:
  
     sudo docker-compose -f docker-compose.yml up -d
+    
+Update the Database using:
+
+    flask db upgrade
     
 ### Env Settings
 
