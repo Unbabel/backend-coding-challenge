@@ -33,6 +33,7 @@ def store_translation_in_database(source_text):
     """
     translation = Translation(uuid=generate_uuid(),
                               source_text=source_text,
+                              translated_text='',
                               source_language=settings.SOURCE_TRANSLATION_LANGUAGE,
                               target_language=settings.TARGET_TRANSLATION_LANGUAGE)
     db.session.add(translation)
