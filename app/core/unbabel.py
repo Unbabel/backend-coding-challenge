@@ -35,6 +35,7 @@ def send_request_to_unbabel(uid, source_text):
         "uid": uid
     }
     try:
+        logger.info("Sending {} to {}".format(str(data), settings.UNBABEL_TRANSLATION_URL))
         response = requests.post(settings.UNBABEL_TRANSLATION_URL, data=json.dumps(data), headers=headers)
     except Exception:
         response = None
